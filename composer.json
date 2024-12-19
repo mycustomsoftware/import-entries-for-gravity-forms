@@ -1,0 +1,17 @@
+{
+  "name": "vendor_name/gf-import",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "marktanasevich",
+      "email": "email@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ImportEntriesGravityForms\\": "src"
+    }
+  }
+}
