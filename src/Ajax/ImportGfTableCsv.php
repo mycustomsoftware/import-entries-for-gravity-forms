@@ -27,7 +27,7 @@ class ImportGfTableCsv
 		$filetype = $_FILES['csv_file']['type'];
 		if( str_contains($filetype, 'csv')  == false){
 			wp_send_json_error(array(
-				'message'  => "File format not supported! Import csv file only! {$tmp_name}",
+				'message'  => __("File format not supported! Import csv file only!", "import-entries-for-gravity-forms"),
 				'fileinfo' => $_FILES['csv_file']
 			));
 			exit();
@@ -39,7 +39,7 @@ class ImportGfTableCsv
 //		check if file is empty
 		if(empty($content)){
 			wp_send_json_error(array(
-				'message' => "File can not be empty!"
+				'message' => __("File can not be empty!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}
@@ -57,7 +57,7 @@ class ImportGfTableCsv
 		}
 		if(empty($content_path)){
 			wp_send_json_error(array(
-				'message' => "File can not be empty!"
+				'message' => __("File can not be empty!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}

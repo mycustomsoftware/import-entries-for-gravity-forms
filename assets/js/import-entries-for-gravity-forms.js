@@ -29,12 +29,14 @@
 			const formData = new FormData();
 			formData.append('data',JSON.stringify(import_data));
 			formData.append('import_entries_gf_table_data_wpnonce',_wpnonce);
+			__get('#submit_button_import').style.display = "none";
 			const resp = await fetch(ajaxurl+'?action='+__get('[name="action_import"]').value,{
 				method : "POST",
 				body   : formData
 			})
 			const result = await resp.json();
 			if(result.message){
+				__get('#submit_button_import').style.display = "";
 				alert(result.message);
 			}
 			if(result.in_progress){
@@ -44,8 +46,10 @@
 				__get('#progress_container').innerHTML = Math.floor(result.offset * 100 / result.total_rows_found)+"%";
 			}
 			if(result.is_done){
-				__get('#progress_container').innerHTML = "100%";
-				alert("Done");
+				__get('#please_wait_container').style.display = "none";
+				__get('#import_is_done').style.display = "";
+				__get('#submit_button_import').style.display = "none";
+				alert(result.is_done);
 			}
 		}
 
