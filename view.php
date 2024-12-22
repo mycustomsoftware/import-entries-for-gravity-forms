@@ -50,7 +50,7 @@ $forms = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}gf_form");
             </tr>
             <tr id="import_field_container" valign="top" style="display: none;">
                 <th scope="row">
-                    <label for="csv_file"><?php _e("Select File", "import-entries-for-gravity-forms"); ?></label>
+                    <label><?php _e("Select File", "import-entries-for-gravity-forms"); ?></label>
                     <button onclick="return false;" onkeypress="return false;" class="gf_tooltip tooltip tooltip_import_select_fields" aria-label="<?php _e("Select CSV file to import", "import-entries-for-gravity-forms"); ?>">
                         <i class="gform-icon gform-icon--question-mark" aria-hidden="true"></i>
                     </button>
@@ -58,9 +58,10 @@ $forms = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}gf_form");
                 <td>
                     <input type="hidden" name="action_import" value="import_entries_gf_table_data">
 	                <?php wp_nonce_field('import_entries_gf_table_data','import_entries_gf_table_data_wpnonce'); ?>
-                    <input type="file" name="csv_file" id="csv_file">
+                    <input type="hidden" name="csv_file" id="csv_file">
+                    <a href="#select-csv" class="button button-primary">Select File</a>
                     <br><br>
-                    <button id="submit_button" style="display:none;" type="button" class="button large primary"><?php _e("Import File", "import-entries-for-gravity-forms"); ?></button>
+                    <button id="submit_button" style="display:none;" type="button" class="button large primary"><?php _e("Associate fields", "import-entries-for-gravity-forms"); ?></button>
                     <ul>
                         <li>
                             <ul id="imported_entries_list"></ul>
@@ -94,7 +95,9 @@ $forms = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}gf_form");
                     <button id="submit_button_import" type="button" class="button large primary"><?php _e("Start Import", "import-entries-for-gravity-forms"); ?></button>
                     <ul>
                         <li id="import_submit_container" style="display:none; clear:both;">
-                            <span id="please_wait_container"><i class="gficon-gravityforms-spinner-icon gficon-spin"></i><?php _e(" Importing entries. Progress:", "import-entries-for-gravity-forms"); ?><span id="progress_container">0%</span></span>
+                            <span id="please_wait_container"><i class="gficon-gravityforms-spinner-icon gficon-spin"></i><?php _e(" Importing entries.", "import-entries-for-gravity-forms"); ?>
+                                <div><?php _e("Progress:", "import-entries-for-gravity-forms"); ?></div>
+                                <div class="progress"><div class="progress-done" id="progress_container"></div></div></span>
                             <span id="import_is_done" style="display:none;"><?php _e("Import complete!", "import-entries-for-gravity-forms"); ?></span>
                         </li>
                     </ul>
@@ -104,6 +107,7 @@ $forms = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}gf_form");
         </table>
     </form>
 </div>
+<?php wp_enqueue_media(); ?>
 <script type="text/html" id="import_form_list_item">
     <li style="display:flex;align-items:center;">
         <label for="{{fieldId}}">{{rowName}}</label>
@@ -113,5 +117,28 @@ $forms = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}gf_form");
 <style>
     #import_form_list label {
         flex: 0 0 30%;
+    }
+
+    .progress {
+        background-color: #d8d8d8;
+        border-radius: 20px;
+        position: relative;
+        margin: 15px 0;
+        height: 10px;
+        width: 100%;
+    }
+
+    .progress-done {
+        background: linear-gradient(to left,#2dd9fe, #00fe9b);
+        box-shadow: 0 3px 3px -5px #2dd9fe, 0 2px 5px #00fe9b;
+        border-radius: 20px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 0;
+        opacity: 0.5;
+        transition: 1s ease 0.3s;
     }
 </style>

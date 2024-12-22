@@ -1,4 +1,15 @@
 (function(){
+	const __trigger = function (el, eventType) {
+		if (typeof eventType === 'string' && typeof el[eventType] === 'function') {
+			el[eventType]();
+		} else {
+			const event =
+				typeof eventType === 'string'
+					? new Event(eventType, {bubbles: true})
+					: eventType;
+			el.dispatchEvent(event);
+		}
+	}
 	const __get = function (selectorName) {
 		const fineElements = document.querySelectorAll(selectorName);
 		if(fineElements.length > 1){
@@ -22,6 +33,9 @@
 		elem.insertAdjacentHTML('beforeend', html);
 	}
 
+	const updateProgressBar =  ( process = 1 ) => {
+		__get('#progress_container').style.width = process+"%";
+	}
 	const runImportStep =  async ( import_data,offset = 0 ) => {
 		if ( import_data.rows.length > 0 ) {
 			import_data.offset = offset;
@@ -30,6 +44,7 @@
 			formData.append('data',JSON.stringify(import_data));
 			formData.append('import_entries_gf_table_data_wpnonce',_wpnonce);
 			__get('#submit_button_import').style.display = "none";
+			updateProgressBar(1);
 			const resp = await fetch(ajaxurl+'?action='+__get('[name="action_import"]').value,{
 				method : "POST",
 				body   : formData
@@ -43,7 +58,11 @@
 				runImportStep(import_data,result.offset);
 			}
 			if(result.total_rows_found){
-				__get('#progress_container').innerHTML = Math.floor(result.offset * 100 / result.total_rows_found)+"%";
+				let process = Math.floor(result.offset * 100 / result.total_rows_found);
+				if(process < 1){
+					process = 1;
+				}
+				updateProgressBar(process);
 			}
 			if(result.is_done){
 				__get('#please_wait_container').style.display = "none";
@@ -54,33 +73,54 @@
 		}
 
 	}
+
+	let MediaFrame = null;
+	__on('click', '[href="#select-csv"]', function (elem) {
+		if ( MediaFrame !== null ) {
+			MediaFrame.open();
+			return;
+		}
+		MediaFrame = wp.media({
+			title: 'Select or Upload CSV file for import entries',
+			button: {
+				text: 'Use this CSV file'
+			},
+			multiple: false
+		});
+		MediaFrame.on( 'select', function() {
+			// Get media attachment details from the frame state
+			var attachment = MediaFrame.state().get('selection').first().toJSON();
+			let input = __get('#csv_file');
+			input.value = attachment.id;
+			__trigger(input, 'change');
+		});
+		MediaFrame.open();
+	},true)
 	__on('click','#submit_button_import', async function(){
 		__get('#import_submit_container').style.display = "";
 		let import_data_area = __get('[name="import_data"]');
 		let import_data = JSON.parse(import_data_area.value);
 		let El      = __get('#import_form_list_row');
-		let newForm = document.createElement("form");
 		import_data['fields'] = {};
 		El.querySelectorAll('input, select, textarea').forEach((inp) => {
 			import_data['fields'][inp.value] = inp.name;
 		})
-		runImportStep(import_data,1);
+		await runImportStep(import_data,1);
 	});
 	__on('change','#csv_file', async function(){
 		let submit_button  = __get('#submit_button');
 		let csv_file       = __get("#csv_file");
-		if(csv_file.files.length === 0){
+		if(csv_file.value.length === 0){
 			submit_button.style.display = "none";
 		}else{
 			submit_button.style.display = "block";
+			// submit_button.click();
+			__trigger(submit_button,'click');
 		}
 	});
 	__on('click','#submit_button', async function(){
 		let csv_file   = __get("#csv_file");
-		if(!csv_file.files){
-			return;
-		}
-		if(csv_file.files.length === 0){
+		if(csv_file.value.length === 0){
 			return;
 		}
 		let import_csv = __get("#import_csv");

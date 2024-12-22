@@ -19,60 +19,36 @@ class ImportGfTableCsv
 			);
 			exit();
 		}
-		$content = null;
-		$time_start = microtime( true );
-		$tmp_name  = $_FILES['csv_file']['tmp_name'];
-//		Check file format
-		$file_data_info = wp_check_filetype($tmp_name);
-		$filetype = $_FILES['csv_file']['type'];
-		if( str_contains($filetype, 'csv')  == false){
+		$attach_id = $_POST['csv_file'];
+		$form_id   = $_POST['form_id'];
+		if(empty($form_id)){
 			wp_send_json_error(array(
-				'message'  => __("File format not supported! Import csv file only!", "import-entries-for-gravity-forms"),
-				'fileinfo' => $_FILES['csv_file']
+				'message' => __("Please select form!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}
-		if(isset($_FILES['csv_file'])){
-			$content    = file_get_contents($_FILES['csv_file']['tmp_name']);
-			$file_info  = wp_upload_bits($time_start.'.csv', null, $content);
-		}
-//		check if file is empty
-		if(empty($content)){
+		if(empty($attach_id)){
 			wp_send_json_error(array(
-				'message' => __("File can not be empty!", "import-entries-for-gravity-forms")
+				'message' => __("Please select file from your library!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}
-		$form_id = $_POST['form_id'];
+		$content_path = get_attached_file($attach_id);
+		$filetype = wp_check_filetype($content_path);
+		if( str_contains($filetype['ext'], 'csv')  == false){
+			wp_send_json_error(array(
+				'message'  => __("File format not supported! Import csv file only!", "import-entries-for-gravity-forms")
+			));
+			exit();
+		}
 		$data_out = array(
 			'fields'     => (new GfFields)->get(),
-			'filename'   => (string)$time_start,
 			'form_id'    => $form_id,
 			'offset'     => 1,
 			'total_rows_found' => 0,
 			'rows'       => []
 		);
-		if(isset($file_info['file'])){
-			$content_path      = $file_info['file'];
-		}
-		if(empty($content_path)){
-			wp_send_json_error(array(
-				'message' => __("File can not be empty!", "import-entries-for-gravity-forms")
-			));
-			exit();
-		}
-		$filename          = pathinfo($content_path)['basename'];
-		$attachment = array(
-			'post_mime_type' => $filetype,
-			'post_title'     => sanitize_file_name( $filename ),
-			'post_content'   => '',
-			'post_status'    => 'inherit'
-		);
-		$attach_id = wp_insert_attachment( $attachment, $content_path );
 		$data_out['attach_id'] = $attach_id;
-		require_once( ABSPATH . 'wp-admin/includes/image.php' );
-		$attach_data = wp_generate_attachment_metadata( $attach_id, $content_path );
-		wp_update_attachment_metadata( $attach_id, $attach_data );
 		$row_count = 0;
 		if (($handle = fopen($content_path, "r")) !== FALSE) {
 			while (($data = fgetcsv($handle)) !== FALSE) {

@@ -68,7 +68,6 @@ class ImportEntriesGfTableData
 				$row++;
 			}
 			fclose($handle);
-			wp_delete_attachment($attach_id,true);
 			wp_send_json(
 				array( 'is_done'     => __("Import is successfully completed!","import-entries-for-gravity-forms") )
 			);

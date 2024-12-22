@@ -1,0 +1,143 @@
+# Copyright (C) 2024 My Custom Software
+# This file is distributed under the GPLv3.
+msgid ""
+msgstr ""
+"Project-Id-Version: Import entries for Gravity Forms 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/import-entries-for-gravity-forms\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-12-20T06:54:12+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: import-entries-for-gravity-forms\n"
+
+#. Plugin Name of the plugin
+#: import-entries-for-gravity-forms.php
+msgid "Import entries for Gravity Forms"
+msgstr "Import entries for Gravity Forms"
+
+#. Plugin URI of the plugin
+#: import-entries-for-gravity-forms.php
+msgid "https://wordpress.org/plugins/import-entries-for-gravity-forms"
+msgstr "https://wordpress.org/plugins/import-entries-for-gravity-forms"
+
+#. Author of the plugin
+#: import-entries-for-gravity-forms.php
+msgid "My Custom Software"
+msgstr "My Custom Software"
+
+#. Author URI of the plugin
+#: import-entries-for-gravity-forms.php
+msgid "https://github.com/mycustomsoftware"
+msgstr "https://github.com/mycustomsoftware"
+
+#: import-entries-for-gravity-forms.php:66
+#: import-entries-for-gravity-forms.php:67
+msgid "View details"
+msgstr ""
+
+#: import-entries-for-gravity-forms.php:74
+#: import-entries-for-gravity-forms.php:75
+msgid "Import entries"
+msgstr ""
+
+#: src/Ajax/ImportEntriesGfTableData.php:18
+msgid "You are not allowed to import entries!"
+msgstr ""
+
+#: src/Ajax/ImportEntriesGfTableData.php:26
+msgid "Data is empty!"
+msgstr ""
+
+#: src/Ajax/ImportEntriesGfTableData.php:72
+#: src/Ajax/ImportEntriesGfTableData.php:77
+msgid "Import is successfully completed!"
+msgstr ""
+
+#: src/Ajax/ImportGfTableCsv.php:26
+msgid "Please select form!"
+msgstr ""
+
+#: src/Ajax/ImportGfTableCsv.php:32
+msgid "Please select file from your library!"
+msgstr ""
+
+#: src/Ajax/ImportGfTableCsv.php:40
+msgid "File format not supported! Import csv file only!"
+msgstr ""
+
+#: src/Import/AddMenuItem.php:15
+msgid "Import Entries"
+msgstr ""
+
+#: view.php:10
+msgid "Import Entries CSV"
+msgstr ""
+
+#: view.php:15
+msgid "Select a form below to import entries. Once you have selected a form you may upload a CSV file and select the fields you would like to associate with the entries."
+msgstr ""
+
+#: view.php:17
+msgid "When you click the upload button below, Gravity Forms will import entries to the selected form."
+msgstr ""
+
+#: view.php:26
+#: view.php:39
+msgid "Select form"
+msgstr ""
+
+#: view.php:29
+msgid "%sImport Entries to selected Form%s Select the form you would like to import entry data. You may only import data from one form at a time."
+msgstr ""
+
+#: view.php:47
+msgid "No forms found!"
+msgstr ""
+
+#: view.php:47
+msgid "Add New"
+msgstr ""
+
+#: view.php:53
+msgid "Select File"
+msgstr ""
+
+#: view.php:54
+msgid "Select CSV file to import"
+msgstr ""
+
+#: view.php:64
+msgid "Associate fields"
+msgstr ""
+
+#: view.php:74
+msgid "Select Form fields"
+msgstr ""
+
+#: view.php:77
+msgid "%sSelect Form fields%s associate entries with a form fields."
+msgstr ""
+
+#: view.php:89
+msgid "Import process"
+msgstr ""
+
+#: view.php:95
+msgid "Start Import"
+msgstr ""
+
+#: view.php:98
+msgid " Importing entries."
+msgstr ""
+
+#: view.php:99
+msgid "Progress:"
+msgstr ""
+
+#: view.php:101
+msgid "Import complete!"
+msgstr ""
