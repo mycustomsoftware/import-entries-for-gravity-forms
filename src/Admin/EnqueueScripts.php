@@ -9,6 +9,6 @@ class EnqueueScripts
 	}
 	function enqueue_scripts(){
 		$min = GFIMPORTENV == "production" ? ".min" : "";
-		wp_enqueue_script("import-entries-for-gravity-forms",plugins_url("assets/js/import-entries-for-gravity-forms{$min}.js",GFIMPORTFILE));
+		wp_enqueue_script("import-entries-for-gravity-forms",plugins_url("assets/js/import-entries-for-gravity-forms{$min}.js",GFIMPORTFILE),array(),GFIMPORTVERSION,true);
 	}
 }

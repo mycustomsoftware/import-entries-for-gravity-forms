@@ -15,7 +15,7 @@ class ImportEntriesGfTableData
 		if(!$verify){
 			wp_send_json_error(
 				array(
-					"message" => __("You are not allowed to import entries!", "import-entries-for-gravity-forms")
+					"message" => esc_html("You are not allowed to import entries!", "import-entries-for-gravity-forms")
 				)
 			);
 		}
@@ -23,7 +23,7 @@ class ImportEntriesGfTableData
 		if(empty($_POST['data'])) {
 			wp_send_json_error(
 				array(
-					"message" => __("Data is empty!", "import-entries-for-gravity-forms")
+					"message" => esc_html("Data is empty!", "import-entries-for-gravity-forms")
 				)
 			);
 		}
@@ -69,12 +69,12 @@ class ImportEntriesGfTableData
 			}
 			fclose($handle);
 			wp_send_json(
-				array( 'is_done'     => __("Import is successfully completed!","import-entries-for-gravity-forms") )
+				array( 'is_done'     => esc_html("Import is successfully completed!","import-entries-for-gravity-forms") )
 			);
 			exit();
 		}
 		wp_send_json(
-			array( 'is_done'     => __("Import is successfully completed!","import-entries-for-gravity-forms") )
+			array( 'is_done'     => esc_html("Import is successfully completed!","import-entries-for-gravity-forms") )
 		);
 	}
 }

@@ -14,7 +14,7 @@ class ImportGfTableCsv
 		if(!$verify){
 			wp_send_json_error(
 				array(
-					"message"=> __("You are not allowed to import files!")
+					"message"=> esc_html("You are not allowed to import files!")
 				)
 			);
 			exit();
@@ -23,13 +23,13 @@ class ImportGfTableCsv
 		$form_id   = $_POST['form_id'];
 		if(empty($form_id)){
 			wp_send_json_error(array(
-				'message' => __("Please select form!", "import-entries-for-gravity-forms")
+				'message' => esc_html("Please select form!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}
 		if(empty($attach_id)){
 			wp_send_json_error(array(
-				'message' => __("Please select file from your library!", "import-entries-for-gravity-forms")
+				'message' => esc_html("Please select file from your library!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}
@@ -37,7 +37,7 @@ class ImportGfTableCsv
 		$filetype = wp_check_filetype($content_path);
 		if( str_contains($filetype['ext'], 'csv')  == false){
 			wp_send_json_error(array(
-				'message'  => __("File format not supported! Import csv file only!", "import-entries-for-gravity-forms")
+				'message'  => esc_html("File format not supported! Import csv file only!", "import-entries-for-gravity-forms")
 			));
 			exit();
 		}

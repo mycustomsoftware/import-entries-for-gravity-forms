@@ -12,7 +12,7 @@ class AddMenuItem
 	function add_item( $menu_items ){
 		$menu_items[] = array(
 			'name'  => self::$id,
-			'label' => __( 'Import Entries', 'import-entries-for-gravity-forms' ),
+			'label' => esc_html( 'Import Entries', 'import-entries-for-gravity-forms' ),
 			'icon'  => self::$icon
 		);
 		return $menu_items;
