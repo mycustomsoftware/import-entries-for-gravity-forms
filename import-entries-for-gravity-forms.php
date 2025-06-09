@@ -3,7 +3,7 @@
  * Plugin Name: Import entries for Gravity Forms
  * Plugin URI: https://wordpress.org/plugins/import-entries-for-gravity-forms
  * Description: Simplify your workflow with Import Entries for Gravity Forms, the essential tool for importing data into your Gravity Forms effortlessly. Whether you’re migrating data from another system, updating existing forms, or consolidating entries, this plugin saves you time and effort.
- * Version: 1.0
+ * Version: 1.0.2
  * Author:      My Custom Software
  * Author URI: https://github.com/mycustomsoftware
  *  License: GPLv3
@@ -16,7 +16,7 @@ if(!defined('ABSPATH')) {
 	exit;
 }
 if(!defined('GFIMPORTVERSION')){
-	define("GFIMPORTVERSION","1.0");
+	define("GFIMPORTVERSION","1.0.2");
 }
 if(!defined('GFIMPORTPATH')){
 	define("GFIMPORTPATH",__DIR__);

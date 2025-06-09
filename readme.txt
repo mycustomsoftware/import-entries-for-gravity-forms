@@ -1,11 +1,12 @@
 === Import entries for Gravity Forms ===
 Tags: Import entries for Gravity Forms
-Requires at least: 6.2
-Tested up to: 6.5
-Stable tag: 1.0.0
-Requires at least: 7.4.2
+Tested up to: 6.7
+Stable tag: 1.0.2
+Requires at least: 6.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Simplify your workflow with Import Entries for Gravity Forms, the essential tool for importing data into your Gravity Forms effortlessly.
 
 == Description ==
 
@@ -50,6 +51,9 @@ This plugin allows you to import form entries directly into your Gravity Forms. 
 
 
 == Changelog ==
+
+= 1.0.2 =
+Fixed issue with displaying trash forms in drop-down menu. Fix issue with associating fields list empty.
 
 = 1.0.0 =
 Initial release.
