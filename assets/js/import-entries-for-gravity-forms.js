@@ -139,10 +139,13 @@
 			let Elrow     = __get('#import_form_list_row');
 			let El        = __get('#import_form_list');
 			let ItemEl    = __get('#import_form_list_item');
-			let options = '';
-			for (let i = 0; i < headrow.length; i++) {
-				options += '<option value="'+i+'" data-if-selected="'+i+'">'+headrow[i]+'</option>';
-			}
+			let options = `<option value="">Select Field (not associated)</option>`;
+			Object.keys(headrow).map((i) => {
+				const obj = headrow[i];
+				if(obj !== ""){
+					options += `<option value="${i}" data-if-selected="${i}">${obj}</option>`;
+				}
+			})
 			for (let i = 0; i < fields.length; i++) {
 				let template = ItemEl.innerHTML;
 				template = template

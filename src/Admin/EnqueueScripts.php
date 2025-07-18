@@ -8,7 +8,7 @@ class EnqueueScripts
 		add_action('admin_enqueue_scripts',array($this,'enqueue_scripts'));
 	}
 	function enqueue_scripts(){
-		$min = GFIMPORTENV == "production" ? ".min" : "";
-		wp_enqueue_script("import-entries-for-gravity-forms",plugins_url("assets/js/import-entries-for-gravity-forms{$min}.js",GFIMPORTFILE),array(),GFIMPORTVERSION,true);
+		$min = IMPORT_ENTRIES_GRAVITY_FORMS_PATH_ENV == "production" ? ".min" : "";
+		wp_enqueue_script("import-entries-for-gravity-forms",plugins_url("assets/js/import-entries-for-gravity-forms{$min}.js",IMPORT_ENTRIES_GRAVITY_FORMS_PATH_FILE),array(),IMPORT_ENTRIES_GRAVITY_FORMS_VER,true);
 	}
 }

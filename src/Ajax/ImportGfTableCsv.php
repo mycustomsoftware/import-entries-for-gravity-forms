@@ -34,7 +34,7 @@ class ImportGfTableCsv
 			exit();
 		}
 		$content_path = get_attached_file($attach_id);
-		$filetype = wp_check_filetype($content_path);
+		$filetype     = wp_check_filetype($content_path);
 		if( str_contains($filetype['ext'], 'csv')  == false){
 			wp_send_json_error(array(
 				'message'  => esc_html("File format not supported! Import csv file only!", "import-entries-for-gravity-forms")
@@ -42,11 +42,11 @@ class ImportGfTableCsv
 			exit();
 		}
 		$data_out = array(
-			'fields'     => (new GfFields)->get(),
-			'form_id'    => $form_id,
-			'offset'     => 1,
+			'fields'           => (new GfFields)->get(),
+			'form_id'          => $form_id,
+			'offset'           => 1,
 			'total_rows_found' => 0,
-			'rows'       => []
+			'rows'             => []
 		);
 		$data_out['attach_id'] = $attach_id;
 		$row_count = 0;

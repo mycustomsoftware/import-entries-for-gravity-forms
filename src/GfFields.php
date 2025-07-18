@@ -30,7 +30,12 @@ class GfFields
 		$form    = GFExport::add_default_export_fields( $form );
 		if ( is_array( $form['fields'] )  && !empty($form['fields'])) {
 			foreach ( $form['fields'] as $field ) {
-				if ( ! $field->displayOnly ) {
+				$inputs = $field->get_entry_inputs();
+				if ( is_array( $inputs ) ) {
+					foreach ( $inputs as $input ) {
+						$this->fields[] = array( $input['id'], GFCommon::get_label( $field, $input['id'] ) );
+					}
+				} else if ( ! $field->displayOnly ) {
 					$this->fields[] = array( $field->id, GFCommon::get_label( $field ) );
 				}
 			}

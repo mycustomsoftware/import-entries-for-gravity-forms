@@ -3,7 +3,7 @@
  * Plugin Name: Import entries for Gravity Forms
  * Plugin URI: https://wordpress.org/plugins/import-entries-for-gravity-forms
  * Description: Simplify your workflow with Import Entries for Gravity Forms, the essential tool for importing data into your Gravity Forms effortlessly. Whether you’re migrating data from another system, updating existing forms, or consolidating entries, this plugin saves you time and effort.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author:      My Custom Software
  * Author URI: https://github.com/mycustomsoftware
  *  License: GPLv3
@@ -15,22 +15,23 @@
 if(!defined('ABSPATH')) {
 	exit;
 }
-if(!defined('GFIMPORTVERSION')){
-	define("GFIMPORTVERSION","1.0.2");
+
+if(!defined('IMPORT_ENTRIES_GRAVITY_FORMS_VER')){
+	define("IMPORT_ENTRIES_GRAVITY_FORMS_VER","1.0.3");
 }
-if(!defined('GFIMPORTPATH')){
-	define("GFIMPORTPATH",__DIR__);
+if(!defined('IMPORT_ENTRIES_GRAVITY_FORMS_PATH')){
+	define("IMPORT_ENTRIES_GRAVITY_FORMS_PATH",__DIR__);
 }
-if(!defined('GFIMPORTENV')){
-	define("GFIMPORTENV",'production');
+if(!defined('IMPORT_ENTRIES_GRAVITY_FORMS_PATH_ENV')){
+	define("IMPORT_ENTRIES_GRAVITY_FORMS_PATH_ENV",'production');
 }
-if(!defined('GFIMPORTFILE')){
-	define("GFIMPORTFILE",__FILE__);
+if(!defined('IMPORT_ENTRIES_GRAVITY_FORMS_PATH_FILE')){
+	define("IMPORT_ENTRIES_GRAVITY_FORMS_PATH_FILE",__FILE__);
 }
-if(!defined('GFIMPORTSLUG')){
-	define("GFIMPORTSLUG",'import-entries-for-gravity-forms');
+if(!defined('IMPORT_ENTRIES_GRAVITY_FORMS_SLUG')){
+	define("IMPORT_ENTRIES_GRAVITY_FORMS_SLUG",'import-entries-for-gravity-forms');
 }
-require_once GFIMPORTPATH.'/vendor/autoload.php';
+require_once IMPORT_ENTRIES_GRAVITY_FORMS_PATH.'/vendor/autoload.php';
 use ImportEntriesGravityForms\Admin\EnqueueScripts;
 use ImportEntriesGravityForms\Ajax\ImportEntriesGfTableData;
 use ImportEntriesGravityForms\Ajax\ImportGfTableCsv;
@@ -39,7 +40,7 @@ use ImportEntriesGravityForms\Import\AddPage;
 use ImportEntriesGravityForms\LoadTextDomain;
 
 class GFImportMain {
-	public $slug = GFIMPORTSLUG;
+	public static $slug = IMPORT_ENTRIES_GRAVITY_FORMS_SLUG;
 	function __construct(){
 		new LoadTextDomain();
 		add_action( 'install_plugins_pre_plugin-information', array( $this, 'add_plugin_info_popup_content' ), 9 );
@@ -53,7 +54,7 @@ class GFImportMain {
 		new EnqueueScripts();
 	}
 	function add_plugin_info_popup_content() {
-		if ( sanitize_key($_REQUEST['plugin']) != $this->slug ) {
+		if ( sanitize_key($_REQUEST['plugin']) != self::$slug ) {
 			return;
 		}
 		require_once __DIR__ . '/README.html';
@@ -65,7 +66,7 @@ class GFImportMain {
 				wp_kses_post(
 					sprintf(
 						'<a href="%s" class="thickbox open-plugin-details-modal" title="%s">%s</a>',
-						self_admin_url('plugin-install.php?tab=plugin-information&plugin='.$this->slug.'&TB_iframe=true&width=772&height=450'),
+						self_admin_url('plugin-install.php?tab=plugin-information&plugin='.self::$slug.'&TB_iframe=true&width=772&height=450'),
 						esc_html("View details", 'import-entries-for-gravity-forms'),
 						esc_html("View details", 'import-entries-for-gravity-forms'),
 					)

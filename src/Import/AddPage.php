@@ -11,7 +11,7 @@ class AddPage
 	}
 	function display(){
 		GFExport::page_header();
-		require_once GFIMPORTPATH."/view.php";
+		require_once IMPORT_ENTRIES_GRAVITY_FORMS_PATH."/view.php";
 		GFExport::page_footer();
 	}
 }
