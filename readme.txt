@@ -52,6 +52,9 @@ This plugin allows you to import form entries directly into your Gravity Forms. 
 
 == Changelog ==
 
+= 1.0.5 =
+Added support of 7.0 version
+
 = 1.0.4 =
 Added Gravity forms as a require plugin
 
