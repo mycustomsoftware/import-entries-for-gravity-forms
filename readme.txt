@@ -1,7 +1,7 @@
 === Import entries for Gravity Forms ===
 Tags: Import entries for Gravity Forms
-Tested up to: 6.8
-Stable tag: 1.0.3
+Tested up to: 7.0
+Stable tag: 1.0.5
 Requires at least: 6.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,9 @@ This plugin allows you to import form entries directly into your Gravity Forms. 
 
 
 == Changelog ==
+
+= 1.0.4 =
+Added Gravity forms as a require plugin
 
 = 1.0.3 =
 Fixed issue with subfields. added empty option for the field.
